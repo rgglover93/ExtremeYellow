@@ -514,6 +514,11 @@ RandomFullText:
 RandomSMLRText:
 	db "SMLR@"
 
+NoText:
+	db "NO @"
+YesText:
+	db "YES@"
+
 ; new, for info
 
 RandomizationInfoTexts:
