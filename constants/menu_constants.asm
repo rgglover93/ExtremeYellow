@@ -88,3 +88,11 @@ DEF FIRST_PARTY_MENU_TEXT_ID EQU const_value
 	const NAME_RIVAL_SCREEN  ; 1
 	const NAME_MON_SCREEN    ; 2
 	const NAME_UNI_QUIZ      ; 3, new
+
+; wild mon randomization types
+	const_def
+	const RANDOM_NONE        ; 0
+	const RANDOM_FULL        ; 1
+	const RANDOM_SIMSTRENGTH ; 2
+DEF NUM_RANDOMIZATION_TYPES EQU const_value
+
