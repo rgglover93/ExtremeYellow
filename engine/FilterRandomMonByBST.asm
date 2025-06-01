@@ -13,7 +13,7 @@ FilterRandomMonByBST:
     ld a, [wcf91]
     call _CalculateBST
     ld d, a          ; original BST
-    ld e, 30         ; tolerance range
+    ld e, 80         ; tolerance range
 
     ld c, 40         ; attempt cap
 .randomLoop:
