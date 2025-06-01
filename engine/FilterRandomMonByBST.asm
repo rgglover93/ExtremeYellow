@@ -29,7 +29,9 @@ FilterRandomMonByBST:
     ld a, d          ; original BST
     sub b
     jr nc, .absCheck
-    neg
+    cpl
+    inc a
+
 .absCheck:
     cp e             ; within tolerance?
     pop af
