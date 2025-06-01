@@ -16,8 +16,8 @@ LoadWildData::
 	and a
 	jr z, .NoGrassData ; if no grass data, skip to surfing data
 ; new, to handle wild encounter randomization
-	ld a, [wRandomizationWildEncounters] ; 0=NO, 1=YES
-	and a
+	ld a, [wRandomizationWildEncounters]
+	cp RANDOM_NONE
 	jr z, .noRandomization
 ; we do indeed randomize
 	push hl
@@ -42,9 +42,9 @@ LoadWildData::
 	and a
 	ret z        ; if no water data, we're done
 ; new, to handle wild encounter randomization
-	ld a, [wRandomizationWildEncounters] ; 0=NO, 1=YES
-	and a
-	jr z, .noRandomization2
+	ld a, [wRandomizationWildEncounters]
+	cp RANDOM_NONE
+	jr z, .noRandomization
 ; we do indeed randomize
 	ld de, wWaterMons
 	jp CustomRandomizedCopyData
