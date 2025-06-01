@@ -124,8 +124,23 @@ CustomRandomizedCopyData:
 	jr z, .sanityLoop ; we don't allow the non-pokemon with index 0
 	cp NUM_POKEMON_RANDOMIZABLE+1 ; =203+1 until I add new mons
 	jr nc, .sanityLoop ; if it's >=204, not good
-; when we arrive here, a is within [1,203], and hl has been updated correspondingly
-	ld [de], a ; copy the pokemon species into the target wram buffer (wGrassMons or wWaterMons)
+	; when we arrive here, A is a valid Pokémon ID in range
+	ld [wcf91], a
+	ld b, a
+	ld a, [wRandomizationWildEncounters]
+	cp RANDOM_SIMSTRENGTH
+	jr nz, .useOriginal
+
+	ld a, b
+	call FilterRandomMonByBST
+	jr .storeFiltered
+
+	.useOriginal
+	ld a, b
+
+	.storeFiltered
+	ld [de], a ; write species to wild data
+
 	inc hl ; we go to the next address memory for next loop
 	ld a, h
 	ld [wRandomMemoryAddressForWildRandomization_Current], a
@@ -144,3 +159,5 @@ CustomRandomizedCopyData:
 	ret
 
 ;	call FarCopyData ; copy bc bytes from a:hl to de
+
+INCLUDE "engine/FilterRandomMonByBST.asm"
