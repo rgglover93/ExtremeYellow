@@ -76,12 +76,12 @@ CustomRandomizedCopyData:
 	; if we load data for water TOO, we use a different offset, prime to the first one
 	jr nz, .waterToo
 ; first encounter type we load (only grass or only water map)
-	ld bc, 31 ; arbitrary number, bare minimum is 14, but bigger to allow for higher-than-threshold values, also better be a prime for the reason above
+	ld bc, 41 ; arbitrary number, bare minimum is 14, but bigger to allow for higher-than-threshold values, also better be a prime for the reason above
 	ld a, [wCurMap]
 	call AddNTimes ; add bc to hl a times
 	jr .continueWithReading
 .waterToo
-	ld c, 17 ; arbitrary number, bigger than 14, and preferably prime
+	ld c, 61 ; arbitrary number, bigger than 14, and preferably prime
 	ld b, 0
 	ld a, [wCurMap]
 	call AddNTimes ; add bc to hl a times
