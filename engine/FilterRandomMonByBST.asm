@@ -15,7 +15,7 @@ FilterRandomMonByBST:
     ld d, a          ; original BST
     ld e, 80         ; tolerance range
     ld c, 10         ; attempt cap
-.randomLoop:
+.randomLoop
     call Random
     cp NUM_POKEMON_RANDOMIZABLE + 1
     jr nc, .randomLoop
@@ -24,18 +24,16 @@ FilterRandomMonByBST:
 
     push af
     call _CalculateBST
-    ld b, a          ; candidate BST
-    ld a, d          ; original BST
+    ld b, a
+    ld a, d
     sub b
     jr nc, .absCheck
     cpl
     inc a
-
-.absCheck:
-    cp e             ; within tolerance?
+.absCheck
+    cp e
     pop af
-    jr nc, .retry
-
+    jr nc, .randomLoop  ; retry from new random mon
     jr .done
 
 .retry:
