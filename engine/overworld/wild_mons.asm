@@ -68,20 +68,10 @@ CustomRandomizedCopyData:
 	push de
 	push hl
 	push bc
-	; Instead of pulling from HL + counter, just get a random mon
-	.callRandomSpecies
-	call Random
-	and 0x7F       ; get values from 0–127
-	add 1          ; make sure 1–128
-	ld [wcf91], a
-.loopRandom
-	call Random
-	cp NUM_POKEMON_RANDOMIZABLE + 1
-	jr nc, .loopRandom
-	cp 1
-	jr c, .loopRandom
-	ld [de], a
-
+	ld a, [wRandomMemoryAddressForWildRandomization]
+	ld h, a
+	ld a, [wRandomMemoryAddressForWildRandomization+1]
+	ld l, a
 	CheckEvent EVENT_RANDOM_WILD_BOTH_GRASS_AND_WATER
 	; if we load data for water TOO, we use a different offset, prime to the first one
 	jr nz, .waterToo
